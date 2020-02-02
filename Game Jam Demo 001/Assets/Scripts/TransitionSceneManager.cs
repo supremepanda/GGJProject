@@ -17,7 +17,7 @@ public class TransitionSceneManager : MonoBehaviour
     {
         time -= Time.deltaTime;
         if(time <= 0){
-            SceneManager.LoadScene("Main");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
         }
     }
 }

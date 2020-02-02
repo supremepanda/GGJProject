@@ -11,6 +11,10 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] GameObject uiParent;
     Image[] uiImages;
     [SerializeField] Color highlightColor,normalColor;
+    [SerializeField] public Transform hand;
+    [SerializeField]AudioClip takeSound;
+    [SerializeField]AudioSource auSource;
+
     private void Start()
     {
         uiImages = new Image[uiParent.transform.childCount];
@@ -20,16 +24,37 @@ public class InventoryManager : MonoBehaviour
         }
         inventorySlots = new Item[10];
     }
+    public bool IsItemEquipped(Item _item)
+    {
+        return selectedItem == _item;
+    }
     public void AddItem(Item _item)
     {
-        inventorySlots[LookForFreeSlot()] = _item;
-        UpdateInventoryUI();
+        if (_item.itemType!=ItemType.EnergyBall)
+        {
+            inventorySlots[LookForFreeSlot()] = _item;
+            auSource.PlayOneShot(takeSound);
+            UpdateInventoryUI();
+        }
+        if (_item == FPSController.instance.sphereItem)
+        {
+            FPSController.instance.BatteryTaken = true;
+        }
+        else
+        {
+            FPSController.instance.lightTaken=true;
+        }
     }
     public void RemoveItem()
     {
         inventorySlots[selectedSlot]=null;
+        selectedItem = null;
         HighlightSlot(-1);
         UpdateInventoryUI();
+        if (holdingObject != null)
+        {
+            Destroy(holdingObject);
+        }
     }
     public int LookForFreeSlot()
     {
@@ -42,11 +67,21 @@ public class InventoryManager : MonoBehaviour
         }
         return -1;
     }
+    GameObject holdingObject;
     public void SelectItem(int _index)
     {
         selectedSlot = _index;
         selectedItem = inventorySlots[_index];
         HighlightSlot(_index);
+        if (holdingObject!=null)
+        {
+            Destroy(holdingObject);
+        }
+        if (selectedItem != null)
+        {
+            holdingObject = Instantiate(selectedItem.itemObject, hand); 
+        }
+        
     }
     Image lastImage;
     void HighlightSlot(int _index)

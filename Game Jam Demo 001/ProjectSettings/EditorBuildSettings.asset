@@ -7,11 +7,14 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
-    guid: 84e3077782fa8755d9635619041c890e
+    guid: 53f5798a1e7addc4f8c65402d8d713fd
   - enabled: 1
     path: Assets/Scenes/HikayeGiris.unity
-    guid: 77697b9dfb66710f7a57fbc907d03a29
+    guid: 6ad5d7041f226da43adccc1cf2a41aaf
   - enabled: 1
-    path: Assets/Scenes/Main.unity
-    guid: 1e8bd51887d8a83d3929541d46e7c882
+    path: Assets/Scenes/Level1.unity
+    guid: 48a5be7702ca33c4cb8dfd58f9c73a83
+  - enabled: 1
+    path: Assets/Scenes/FinishingScene.unity
+    guid: 577d70cb0731ae849b304013b636620e
   m_configObjects: {}

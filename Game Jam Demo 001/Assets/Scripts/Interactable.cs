@@ -21,6 +21,7 @@ public class Interactable : MonoBehaviour
     {
         if (_item != null)
         {
+            Debug.Log("AcceptedType" + acceptedItemType + "item type" + _item.itemType);
             if (acceptedItemType == _item.itemType && acceptedItem == _item.itemVariation)
             {
                 return true;
